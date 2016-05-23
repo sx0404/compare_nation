@@ -22,7 +22,11 @@ object test {
     val sever_fulldata = compare_nation(sever_fullpath, sc)
     //val meta_dailydata = compare_nation(meta_dailypath, sc)
 
-    sever_fulldata.repartition(1).saveAsTextFile("hdfs:///sx/word1/")
+
+    val path1 = "hdfs:///sx/word1/"
+    HDFS.removeFile(path1)
+
+    sever_fulldata.repartition(1).saveAsTextFile(path1)
     //meta_dailydata.repartition(1).saveAsTextFile("hdfs:///sx/word2/")
   }
 
