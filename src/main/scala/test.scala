@@ -52,7 +52,7 @@ object test {
 
         val country = findCountry(iptable, ipLong = ipL)
 //        (deviceuid, nation, country)
-        ip
+        (deviceuid,nation,ip)
       }
 
 //      .filter { case (deviceuid, nation, country) =>
@@ -90,7 +90,7 @@ object test {
     for (k <- item) {
       val v = k.split("=")
       if (v(0) == "ip") {
-        ip = v(0)
+        ip = v(1)
       }
     }
     ip
