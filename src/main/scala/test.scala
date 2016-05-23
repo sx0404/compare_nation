@@ -44,15 +44,17 @@ object test {
         val deviceuid = item(0)
         val nation = item(6)
         val ip = get_ip(item(15))
-        println(ip+"11111111111111111111")
+
         val ipL = ip2Long(ip)
-        println(ipL+"222222222222222222222")
+
 
         val iptable = ip2Lc.value
 
         val country = findCountry(iptable, ipLong = ipL)
-        (deviceuid, nation, country)
+//        (deviceuid, nation, country)
+        ip
       }
+
 //      .filter { case (deviceuid, nation, country) =>
 //        if (nation == country) {
 //          true
