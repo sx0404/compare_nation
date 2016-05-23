@@ -28,6 +28,7 @@ object test {
   }
 
   def compare_nation(path: String, sc: SparkContext) = {
+    println(path+"sx")
     val user = sc.textFile(path)
       .map { x =>
         val item = x.split("\t")
