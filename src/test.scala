@@ -26,8 +26,6 @@ object test {
 
     sever_fulldata.repartition(1).saveAsTextFile("hdfs:///sx/word1/")
     meta_dailydata.repartition(1).saveAsTextFile("hdfs:///sx/word2/")
-
-    println("11111111111111")
   }
 
   def compare_nation(path: String, sc: SparkContext) = {
@@ -44,14 +42,14 @@ object test {
 
         val country = findCountry(iptable, ipLong = ipL)
         (deviceuid, nation, country)
-      }
+      }.foreach(x=> println(x+"123456"))
       .filter { case (deviceuid, nation, country) =>
         if (nation == country) {
           true
         } else {
           false
         }
-      }.foreach(x=> println(x+"123456"))
+      }
     user
   }
 
