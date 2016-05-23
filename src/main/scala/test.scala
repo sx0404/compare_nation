@@ -27,6 +27,12 @@ object test {
   }
 
   def compare_nation(path: String, sc: SparkContext) = {
+
+
+    val ip2country = loadIP2COUNTRY(sc)
+    val ip2Lc = sc.broadcast(ip2country)
+
+
     println("sx"+path)
     val user = sc.textFile(path)
       .map { x =>
@@ -37,8 +43,7 @@ object test {
         println(ip+"11111111111111111111")
         val ipL = ip2Long(ip)
         println(ipL+"222222222222222222222")
-        val ip2country = loadIP2COUNTRY(sc)
-        val ip2Lc = sc.broadcast(ip2country)
+
         val iptable = ip2Lc.value
 
         val country = findCountry(iptable, ipLong = ipL)
