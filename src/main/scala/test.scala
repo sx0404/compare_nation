@@ -42,7 +42,7 @@ object test {
       .map { x =>
         val item = x.split("\t")
         val deviceuid = item(0)
-        val nation = item(6)
+        val nation = item(6).toUpperCase
         val ip = get_ip(item(15))
 
         val ipL = ip2Long(ip)
@@ -52,16 +52,16 @@ object test {
 
         val country = findCountry(iptable, ipLong = ipL)
 //        (deviceuid, nation, country)
-        (deviceuid,nation,ip)
+        (deviceuid,nation,country)
       }
 
-//      .filter { case (deviceuid, nation, country) =>
-//        if (nation == country) {
-//          true
-//        } else {
-//          false
-//        }
-//      }
+      .filter { case (deviceuid, nation, country) =>
+        if (nation == country ) {
+          true
+        } else {
+          false
+        }
+      }
     user
   }
 
