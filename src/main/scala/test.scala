@@ -49,13 +49,13 @@ object test {
         val country = findCountry(iptable, ipLong = ipL)
         (deviceuid, nation, country)
       }
-      .filter { case (deviceuid, nation, country) =>
-        if (nation == country) {
-          true
-        } else {
-          false
-        }
-      }
+//      .filter { case (deviceuid, nation, country) =>
+//        if (nation == country) {
+//          true
+//        } else {
+//          false
+//        }
+//      }
     user
   }
 
