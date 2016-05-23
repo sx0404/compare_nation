@@ -54,14 +54,32 @@ object test {
 //        (deviceuid, nation, country)
         (deviceuid,nation,country)
       }
+      .cache()
 
-      .filter { case (deviceuid, nation, country) =>
-        if (nation == country ) {
-          true
-        } else {
-          false
-        }
+      val sameCount = user.filter{case (duid, nation, country) =>
+        (nation == country ) && nation != ""
       }
+      .count.toFloat
+
+      val totalCount = user.count.toFloat
+
+      val samePercent = sameCount / totalCount
+
+
+      println("suxin-log samePercent " + samePercent)
+
+    user.unpersist()
+
+
+
+
+//      .filter { case (deviceuid, nation, country) =>
+//        if (nation == country ) {
+//          true
+//        } else {
+//          false
+//        }
+//      }
     user
   }
 
