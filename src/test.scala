@@ -35,8 +35,9 @@ object test {
         val deviceuid = item(0)
         val nation = item(6)
         val ip = get_ip(item(15))
+        println(ip+"11111111111111111111")
         val ipL = ip2Long(ip)
-        print(ipL+"1111111111111111111111111s")
+        println(ipL+"222222222222222222222")
         val ip2country = loadIP2COUNTRY(sc)
         val ip2Lc = sc.broadcast(ip2country)
         val iptable = ip2Lc.value
