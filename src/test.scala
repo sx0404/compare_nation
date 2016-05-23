@@ -16,7 +16,9 @@ object test {
     hadoopConf.set("fs.s3n.awsSecretAccessKey", awsSecretAccessKey)
 
     //val path:String = "s3n://word.txt"
-    val sever_fullpath = "s3n://emojikeyboardlite/service_full/20160521/"
+    //s3://emojikeyboardlite/service_full/20160521/
+    //s3://emojikeyboardlite/meta/20160521/
+    val sever_fullpath = "s3n://emojikeyboardlite/service_full/20160521/full-r-00055"
     val meta_dailypath = "s3n://emojikeyboardlite/meta/20160521/"
 
     val sever_fulldata = compare_nation(sever_fullpath, sc)
@@ -24,6 +26,8 @@ object test {
 
     sever_fulldata.repartition(1).saveAsTextFile("hdfs:///sx/word1/")
     meta_dailydata.repartition(1).saveAsTextFile("hdfs:///sx/word2/")
+
+    println("11111111111111")
   }
 
   def compare_nation(path: String, sc: SparkContext) = {
