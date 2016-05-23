@@ -18,13 +18,12 @@ object test {
     //s3://emojikeyboardlite/meta/20160521/
     val sever_fullpath = "s3n://emojikeyboardlite/service_full/20160521/full-r-00055"
     val meta_dailypath = "s3n://emojikeyboardlite/meta/20160521/metatab-r-00015"
-    printf("00000000000000000000000000")
 
     val sever_fulldata = compare_nation(sever_fullpath, sc)
-    val meta_dailydata = compare_nation(meta_dailypath, sc)
+    //val meta_dailydata = compare_nation(meta_dailypath, sc)
 
     sever_fulldata.repartition(1).saveAsTextFile("hdfs:///sx/word1/")
-    meta_dailydata.repartition(1).saveAsTextFile("hdfs:///sx/word2/")
+    //meta_dailydata.repartition(1).saveAsTextFile("hdfs:///sx/word2/")
   }
 
   def compare_nation(path: String, sc: SparkContext) = {
