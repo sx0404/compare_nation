@@ -78,7 +78,7 @@ object test {
     var ip = ""
     for (k <- item) {
       val v = k.split("=")
-      if (k(0) == "ip") {
+      if (v(0) == "ip") {
         ip = v(0)
       }
     }
