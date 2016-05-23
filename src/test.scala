@@ -51,7 +51,7 @@ object test {
         } else {
           false
         }
-      }
+      }.foreach(x=> println(x+"123456"))
     user
   }
 
