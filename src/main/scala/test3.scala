@@ -44,6 +44,7 @@ object test3 {
   def jisuan(path: String, sc: SparkContext) = {
     val data = sc.textFile(path)
       .filter { x =>
+        println(x)
         (x.contains(" /click/") || x.contains(" /show/"))
       }
       .map{x =>
