@@ -53,7 +53,7 @@ object test3 {
         (log_result._1,log_result._2,log_result._3,log_result._4,log_result._5)
       }.cache()
       .collect()
-      .foreach(x => "suxing log " + x)
+      .foreach(x => println("suxing log " + x))
 
 //   val click = data.filter{ case (leibie, oid, strategy_name, app_key, sdk_version) =>
 //      if (leibie == "click") true else false
