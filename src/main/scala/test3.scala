@@ -25,10 +25,10 @@ object test3 {
     //val meta_dailydata = compare_nation(meta_dailypath, sc)
 
     val path = ("result/click_appkey.txt","result/click_sdk_version,txt","result/show_appkey.txt","result/show_sdk_version,txt")
-    wirte_text(path._1,sever_fulldata._1)
-    wirte_text(path._2,sever_fulldata._2)
-    wirte_text(path._3,sever_fulldata._3)
-    wirte_text(path._4,sever_fulldata._4)
+//    wirte_text(path._1,sever_fulldata._1)
+//    wirte_text(path._2,sever_fulldata._2)
+//    wirte_text(path._3,sever_fulldata._3)
+//    wirte_text(path._4,sever_fulldata._4)
 
     //meta_dailydata.repartition(1).saveAsTextFile("hdfs:///sx/word2/")
   }
