@@ -2,6 +2,7 @@
   * Created by SX_H on 2016/5/16.
   */
 import org.apache.spark.{SparkConf, SparkContext}
+import java.io._
 
 object test2 {
   def main(args: Array[String]) = {
@@ -26,11 +27,18 @@ object test2 {
 
     val path1 = "hdfs:///sx/percent_country/"
     val path2 = "hdfs:///sx/percent_lg/"
-    HDFS.removeFile(path1)
-    HDFS.removeFile(path2)
 
-    sever_fulldata._1.repartition(1).saveAsTextFile(path1)
-    sever_fulldata._1.repartition(1).saveAsTextFile(path2)
+    val writer_country = new PrintWriter(new File("result_contry.txt" ))
+    val writer_lg = new PrintWriter(new File("result_lg.txt" ))
+    for (item <- sever_fulldata._1) {
+      writer_country.write(item + "\n")
+    }
+    writer_country.close()
+    for (item <- sever_fulldata._2) {
+      writer_lg.write(item + "\n")
+    }
+    writer_lg.close()
+
     //meta_dailydata.repartition(1).saveAsTextFile("hdfs:///sx/word2/")
   }
 
@@ -64,10 +72,11 @@ object test2 {
       (duid)
     }.distinct().count().toFloat
 
-      val country_user = println(println(user.map {
+      val country_user = user.map {
         case (duid, nation, lg, country) =>
           (duid, country)
-      }.distinct()
+      }
+        .distinct()
         .map { case (duid, country) =>
           (country, 1)
         }.reduceByKey(_ + _)
