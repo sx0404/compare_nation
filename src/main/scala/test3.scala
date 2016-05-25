@@ -117,30 +117,30 @@ object test3 {
  def parse_log(log:String)={
    val name = log.split("&")
    var leibie,oid,strategy_name,app_key,sdk_version = ""
-   if (log.contains("/click/")) {
+   if (log.contains(" /click/")) {
      leibie = "click"
-   }else if (log.contains("/show/")) {
+   }else if (log.contains(" /show/")) {
      leibie = "show"
    }
    for (item <- name) {
      if (item.contains("app_key=")) {
        val haha = item.split("=")
-       if (haha.length >2){
+       if (haha.length == 2){
        app_key = haha(1)
        }
      }else if (item.contains("oid=")) {
        val haha = item.split("=")
-       if (haha.length >2){
+       if (haha.length == 2){
          oid = haha(1)
        }
      }else if (item.contains("strategy_name=")) {
        val haha = item.split("=")
-       if (haha.length >2) {
+       if (haha.length == 2) {
          strategy_name = haha(1)
        }
      }else if (item.contains("sdk_version=")) {
        val haha = item.split("=")
-         if (haha.length >2) {
+         if (haha.length == 2) {
            sdk_version = haha(1)
          }
      }else {}
