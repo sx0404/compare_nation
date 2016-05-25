@@ -111,7 +111,7 @@ object test3 {
 //          false
 //        }
 //      }
-    (click_app_key,click_sdk_version,show_app_key,show_sdk_version)
+//    (click_app_key,click_sdk_version,show_app_key,show_sdk_version)
   }
 
  def parse_log(log:String)={
