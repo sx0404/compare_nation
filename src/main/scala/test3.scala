@@ -61,15 +61,15 @@ object test3 {
     }.reduceByKey(_+_)
       .map{x =>
         val percent_appkey = x._1._2.toFloat / click_num
-        (x._1,percent_appkey)
-      }.collect().sortBy(_._2)
+        (x._1._1,x._1._2,percent_appkey)
+      }.collect().sortBy(_._3)
     val click_sdk_version = click.map{case (leibie, oid, strategy_name, app_key, sdk_version) =>
       ((leibie,sdk_version),1)
     }.reduceByKey(_+_)
       .map{x =>
         val percent_sdk_version = x._1._2.toFloat / click_num
-        (x._1,percent_sdk_version)
-      }.collect().sortBy(_._2)
+        (x._1._1,x._2,percent_sdk_version)
+      }.collect().sortBy(_._3)
     click.unpersist()
 
     val show = data.filter{ case (leibie, oid, strategy_name, app_key, sdk_version) =>
@@ -81,15 +81,15 @@ object test3 {
     }.reduceByKey(_+_)
       .map{x =>
         val percent_appkey = x._1._2.toFloat / click_num
-        (x._1,percent_appkey)
-      }.collect().sortBy((_._2))
+        (x._1._1,x._1._2,percent_appkey)
+      }.collect().sortBy((_._3))
     val show_sdk_version = show.map{case (leibie, oid, strategy_name, app_key, sdk_version) =>
       ((leibie,sdk_version),1)
     }.reduceByKey(_+_)
       .map{x =>
         val percent_sdk_version = x._1._2.toFloat / click_num
-        (x._1,percent_sdk_version)
-      }.collect().sortBy(_._2)
+        (x._1._1,x._1._2,percent_sdk_version)
+      }.collect().sortBy(_._3)
     show.unpersist()
 
     data.unpersist()
