@@ -25,7 +25,7 @@ object test3 {
     //val meta_dailydata = compare_nation(meta_dailypath, sc)
 
     val path = ("result/click_appkey.txt","result/click_sdk_version,txt","result/show_appkey.txt","result/show_sdk_version,txt")
-      wirte_text(path._1,sever_fulldata._1)
+    wirte_text(path._1,sever_fulldata._1)
     wirte_text(path._2,sever_fulldata._2)
     wirte_text(path._3,sever_fulldata._3)
     wirte_text(path._4,sever_fulldata._4)
@@ -33,7 +33,7 @@ object test3 {
     //meta_dailydata.repartition(1).saveAsTextFile("hdfs:///sx/word2/")
   }
 
-  def wirte_text(path:String,key:Array[((String,String),Float)]) {
+  def wirte_text(path:String,key:Array[(String,String,Float)]) {
     val writer = new PrintWriter(new File(path))
     for (item <- key) {
       writer.write(item + "\n")
@@ -68,7 +68,7 @@ object test3 {
     }.reduceByKey(_+_)
       .map{x =>
         val percent_sdk_version = x._1._2.toFloat / click_num
-        (x._1._1,x._2,percent_sdk_version)
+        (x._1._1,x._1._2,percent_sdk_version)
       }.collect().sortBy(_._3)
     click.unpersist()
 
