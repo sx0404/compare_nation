@@ -54,7 +54,7 @@ object test3 {
 
    val click = data.filter{ case (leibie, oid, strategy_name, app_key, sdk_version) =>
       if (leibie == "click") true else false
-   }.cache()
+   }
     val click_num = click.count().toFloat
     val click_app_key = click.map{case (leibie, oid, strategy_name, app_key, sdk_version) =>
       ((leibie,app_key),1)
@@ -70,11 +70,10 @@ object test3 {
         val percent_sdk_version = x._1._2.toFloat / click_num
         (x._1,percent_sdk_version)
       }.collect().sortBy(_._2)
-    click.unpersist()
 
     val show = data.filter{ case (leibie, oid, strategy_name, app_key, sdk_version) =>
       if (leibie == "show") true else false
-    }.cache()
+    }
     val show_num = show.count().toFloat
     val show_app_key = show.map{case (leibie, oid, strategy_name, app_key, sdk_version) =>
       ((leibie,app_key),1)
@@ -90,7 +89,6 @@ object test3 {
         val percent_sdk_version = x._1._2.toFloat / click_num
         (x._1,percent_sdk_version)
       }.collect().sortBy(_._2)
-    show.unpersist()
 
     data.unpersist()
 
