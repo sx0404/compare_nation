@@ -138,7 +138,7 @@ object test3 {
        if (haha.length == 2) {
          strategy_name = haha(1)
        }
-     }else if (item.contains("sdk_version=")) {
+     }else if (item.contains("sdk_ver=")) {
        val haha = item.split("=")
          if (haha.length == 2) {
            sdk_version = haha(1)
