@@ -47,7 +47,8 @@ object test3 {
         (x.contains("/click/") || x.contains("/show/"))
       }
       .map{x =>
-        fenxi_log(x)
+        val log_result = fenxi_log(x)
+        (log_result._1,log_result._2,log_result._3,log_result._4,log_result._5)
       }.cache()
 
    val click = data.filter{ case (leibie, oid, strategy_name, app_key, sdk_version) =>
