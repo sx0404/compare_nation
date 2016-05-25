@@ -74,7 +74,7 @@ object test2 {
       .map{x =>
         val result = x._2.toFloat / total_user
         (x._1,result)
-      }.sortByKey()
+      }.sortByKey().sortBy(_._2)
 
       val lg_user = user.map{
         case (duid,nation,lg,country) =>
@@ -86,7 +86,7 @@ object test2 {
       .map{x =>
        val jieguo = x._2.toFloat / total_user
         (x._1,jieguo)
-      }.sortByKey()
+      }.collect().sortBy(_._2)
 
 
     user.unpersist()
