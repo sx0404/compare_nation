@@ -48,6 +48,7 @@ object test3 {
       }
       .map{x =>
         val log_result = fenxi_log(x)
+        println("sx "+log_result._1+log_result._2+log_result._3+log_result._4+log_result._5)
         (log_result._1,log_result._2,log_result._3,log_result._4,log_result._5)
       }.cache()
 
