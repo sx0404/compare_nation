@@ -25,10 +25,10 @@ object test3 {
     //val meta_dailydata = compare_nation(meta_dailypath, sc)
 
     val path = ("result/click_appkey.txt","result/click_sdk_version,txt","result/show_appkey.txt","result/show_sdk_version,txt")
-//    wirte_text(path._1,sever_fulldata._1)
-//    wirte_text(path._2,sever_fulldata._2)
-//    wirte_text(path._3,sever_fulldata._3)
-//    wirte_text(path._4,sever_fulldata._4)
+    wirte_text(path._1,sever_fulldata._1)
+    wirte_text(path._2,sever_fulldata._2)
+    wirte_text(path._3,sever_fulldata._3)
+    wirte_text(path._4,sever_fulldata._4)
 
     //meta_dailydata.repartition(1).saveAsTextFile("hdfs:///sx/word2/")
   }
@@ -51,67 +51,65 @@ object test3 {
         val log_result = parse_log(x)
 //        println("sx "+log_result._1+log_result._2+log_result._3+log_result._4+log_result._5)
         (log_result._1,log_result._2,log_result._3,log_result._4,log_result._5)
-      }.collect().foreach{x =>
-    println("sx " + x)
-    }
+      }.cache()
 
-//   val click = data.filter{ case (leibie, oid, strategy_name, app_key, sdk_version) =>
-//      if (leibie == "click") true else false
-//   }.cache()
-//    val click_num = click.count().toFloat
-//    val click_app_key = click.map{case (leibie, oid, strategy_name, app_key, sdk_version) =>
-//      ((leibie,app_key),1)
-//    }.reduceByKey(_+_)
-//      .map{case ((leibie,app_key),num)  =>
-//        val percent_appkey = num.toFloat / click_num
-//        (leibie,app_key,percent_appkey)
-//      }.collect().sortBy(_._3)
-//    val click_sdk_version = click.map{case (leibie, oid, strategy_name, app_key, sdk_version) =>
-//      ((leibie,sdk_version),1)
-//    }.reduceByKey(_+_)
-//      .map{case ((leibie,sdk_version),num)=>
-//        val percent_sdk_version = num.toFloat / click_num
-//        (leibie,sdk_version,percent_sdk_version)
-//      }.collect().sortBy(_._3)
-//    click.unpersist()
-//
-//    val show = data.filter{ case (leibie, oid, strategy_name, app_key, sdk_version) =>
-//      if (leibie == "show") true else false
-//    }.cache()
-//    val show_num = show.count().toFloat
-//    val show_app_key = show.map{case (leibie, oid, strategy_name, app_key, sdk_version) =>
-//      ((leibie,app_key),1)
-//    }.reduceByKey(_+_)
-//      .map{case ((leibie,app_key),num) =>
-//        val percent_appkey = num.toFloat / click_num
-//        (leibie,app_key,percent_appkey)
-//      }.collect().sortBy(_._3)
-//    val show_sdk_version = show.map{case (leibie, oid, strategy_name, app_key, sdk_version) =>
-//      ((leibie,sdk_version),1)
-//    }.reduceByKey(_+_)
-//      .map{case ((leibie,sdk_version),num)=>
-//        val percent_sdk_version = num.toFloat / click_num
-//        (leibie,sdk_version,percent_sdk_version)
-//      }.collect().sortBy(_._3)
-//    show.unpersist()
-//
-//    data.unpersist()
+   val click = data.filter{ case (leibie, oid, strategy_name, app_key, sdk_version) =>
+      if (leibie == "click") true else false
+   }.cache()
+    val click_num = click.count().toFloat
+    val click_app_key = click.map{case (leibie, oid, strategy_name, app_key, sdk_version) =>
+      ((leibie,app_key),1)
+    }.reduceByKey(_+_)
+      .map{case ((leibie,app_key),num)  =>
+        val percent_appkey = num.toFloat / click_num
+        (leibie,app_key,percent_appkey)
+      }.collect().sortBy(_._3)
+    val click_sdk_version = click.map{case (leibie, oid, strategy_name, app_key, sdk_version) =>
+      ((leibie,sdk_version),1)
+    }.reduceByKey(_+_)
+      .map{case ((leibie,sdk_version),num)=>
+        val percent_sdk_version = num.toFloat / click_num
+        (leibie,sdk_version,percent_sdk_version)
+      }.collect().sortBy(_._3)
+    click.unpersist()
+
+    val show = data.filter{ case (leibie, oid, strategy_name, app_key, sdk_version) =>
+      if (leibie == "show") true else false
+    }.cache()
+    val show_num = show.count().toFloat
+    val show_app_key = show.map{case (leibie, oid, strategy_name, app_key, sdk_version) =>
+      ((leibie,app_key),1)
+    }.reduceByKey(_+_)
+      .map{case ((leibie,app_key),num) =>
+        val percent_appkey = num.toFloat / click_num
+        (leibie,app_key,percent_appkey)
+      }.collect().sortBy(_._3)
+    val show_sdk_version = show.map{case (leibie, oid, strategy_name, app_key, sdk_version) =>
+      ((leibie,sdk_version),1)
+    }.reduceByKey(_+_)
+      .map{case ((leibie,sdk_version),num)=>
+        val percent_sdk_version = num.toFloat / click_num
+        (leibie,sdk_version,percent_sdk_version)
+      }.collect().sortBy(_._3)
+    show.unpersist()
+
+    data.unpersist()
 
 
 
-   //data.unpersist()
+   data.unpersist()
 
 
 
 
-//      .filter { case (deviceuid, nation, country) =>
-//        if (nation == country ) {
-//          true
-//        } else {
-//          false
-//        }
-//      }
-//    (click_app_key,click_sdk_version,show_app_key,show_sdk_version)
+      .filter { case (deviceuid, nation, country) =>
+        if (nation == country ) {
+          true
+        } else {
+          false
+        }
+      }
+    (click_app_key,click_sdk_version,show_app_key,show_sdk_version)
   }
 
  def parse_log(log:String)={
