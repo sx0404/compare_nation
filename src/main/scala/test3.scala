@@ -122,16 +122,24 @@ object test3 {
    for (item <- name) {
      if (item.contains("app_key=")) {
        val haha = item.split("=")
+       if (haha.length >2){
        app_key = haha(1)
+       }
      }else if (item.contains("oid=")) {
        val haha = item.split("=")
-       oid = haha(1)
+       if (haha.length >2){
+         oid = haha(1)
+       }
      }else if (item.contains("strategy_name=")) {
        val haha = item.split("=")
-       strategy_name = haha(1)
+       if (haha.length >2) {
+         strategy_name = haha(1)
+       }
      }else if (item.contains("sdk_version=")) {
        val haha = item.split("=")
-       sdk_version = haha(1)
+         if (haha.length >2) {
+           sdk_version = haha(1)
+         }
      }else {}
    }
    (leibie,oid,strategy_name,app_key,sdk_version)
