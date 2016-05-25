@@ -95,20 +95,6 @@ object test3 {
 
     data.unpersist()
 
-
-
-   data.unpersist()
-
-
-
-
-      .filter { case (deviceuid, nation, country) =>
-        if (nation == country ) {
-          true
-        } else {
-          false
-        }
-      }
     (click_app_key,click_sdk_version,show_app_key,show_sdk_version)
   }
 
