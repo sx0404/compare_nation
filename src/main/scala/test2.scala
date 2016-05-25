@@ -64,17 +64,17 @@ object test2 {
       (duid)
     }.distinct().count().toFloat
 
-      val country_user = user.map{
-        case (duid,nation,lg,country) =>
-          (duid,country)
+      val country_user = println(println(user.map {
+        case (duid, nation, lg, country) =>
+          (duid, country)
       }.distinct()
         .map { case (duid, country) =>
-          (country,1)
-        }.reduceByKey(_+_)
-      .map{x =>
-        val result = x._2.toFloat / total_user
-        (x._1,result)
-      }.sortByKey().sortBy(_._2)
+          (country, 1)
+        }.reduceByKey(_ + _)
+        .map { x =>
+          val result = x._2.toFloat / total_user
+          (x._1, result)
+        }.collect().sortBy(_._2)
 
       val lg_user = user.map{
         case (duid,nation,lg,country) =>
