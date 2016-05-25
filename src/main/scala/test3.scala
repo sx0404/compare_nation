@@ -19,8 +19,8 @@ object test3 {
     //val path:String = "s3n://word.txt"
     //s3://emojikeyboardlite/service_full/20160521/
     //s3://emojikeyboardlite/meta/20160521/
-    val log_fullpath = "s3n://xinmei-ad-log/open_ad_tracking/tracking-success.log.2016052513"
-
+//    val log_fullpath = "s3n://xinmei-ad-log/open_ad_tracking/tracking-success.log.2016052513"
+    val log_fullpath = "hdfs:///sx/haha"
     val sever_fulldata = jisuan(log_fullpath, sc)
     //val meta_dailydata = compare_nation(meta_dailypath, sc)
 
