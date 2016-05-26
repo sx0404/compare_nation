@@ -21,7 +21,7 @@ object jianglong_task {
     hadoopConf.set("fs.s3n.awsSecretAccessKey", awsSecretAccessKey)
 
     val result_sum = get_sum(sc)
-    //write_csv(result_sum)
+    write_csv(result_sum)
 
    // val shell = ""
   }
@@ -43,8 +43,7 @@ object jianglong_task {
         (x(0).toString, x(1).toString, x(2).toString, x(3).toString)
       }
       .collect()
-      .foreach(x => println("sx log:" + x))
-    //jdbc
+    jdbc
   }
 
   def write_csv(result:Array[(String,String,String,String)]): Unit ={
@@ -55,6 +54,7 @@ object jianglong_task {
     val writer = new BufferedWriter(wr)
     writer.write("day" + "," + "sum(clicks)" + "," + "sum(impretions)" + "," + "sum(installs)" + "\r\n")
     for (item <- result) {
+      println("sx" + item)
       writer.write(item._1 + "," + item._2 + "," + item._3 + "," + item._4 + "\r\n");
     }
   }
