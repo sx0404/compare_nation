@@ -51,12 +51,13 @@ object jianglong_task {
     val date = new SimpleDateFormat("yyyy-MM-dd").format(calendar.getTime())
     val path = "mail_jianglong/" + date + ".csv"
     val wr = new OutputStreamWriter(new FileOutputStream(new File(path)), "UTF8")
-    val writer = new BufferedWriter(wr)
-    writer.write("day" + "," + "sum(clicks)" + "," + "sum(impretions)" + "," + "sum(installs)" + "\r\n")
+    val writers = new BufferedWriter(wr)
+    writers.write("day" + "," + "sum(clicks)" + "," + "sum(impretions)" + "," + "sum(installs)" + "\r\n")
     for (item <- result) {
       println("sx" + item)
-      writer.write(item._1 + "," + item._2 + "," + item._3 + "," + item._4 + "\r\n");
+      writers.write(item._1 + "," + item._2 + "," + item._3 + "," + item._4 + "\r\n");
     }
+    writers.close()
   }
 }
 
