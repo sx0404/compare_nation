@@ -21,7 +21,7 @@ object jianglong_task {
     hadoopConf.set("fs.s3n.awsSecretAccessKey", awsSecretAccessKey)
 
     val result_sum = get_sum(sc)
-    write_csv(result_sum)
+   // write_csv(result_sum)
 
    // val shell = ""
   }
@@ -42,7 +42,7 @@ object jianglong_task {
       .map{x =>
         (x(0).toString, x(1).toString, x(2).toString, x(3).toString,x(4).toString)
       }
-      .collect()
+      .collect().foreach(x => println("sx log:" + x))
     jdbc
   }
 
