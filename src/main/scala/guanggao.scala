@@ -53,7 +53,7 @@ object guanggao {
         "driver" -> "com.mysql.jdbc.Driver"
       )
     ).load()
-    val sql_str = "SELECT day,oid,app_key,SUM(clicks),SUM(impressions),SUM(installs) FROM `ad` where app_key=\"e2934742f9d3b8ef2b59806a041ab389\" or app_key = \"34c0ab0089e7a42c8b5882e1af3d71f9\" or app_key=\"78472ddd7528bcacc15725a16aeec190\" or app_key=\"4e5ab3a6d2140457e0423a28a094b1fd\" GROUP BY `day`,oid"
+    val sql_str = "SELECT day,oid,app_key,SUM(clicks),SUM(impressions),SUM(installs) FROM ad where app_key='e2934742f9d3b8ef2b59806a041ab389' or app_key = '34c0ab0089e7a42c8b5882e1af3d71f9' or app_key='78472ddd7528bcacc15725a16aeec190' or app_key='4e5ab3a6d2140457e0423a28a094b1fd' GROUP BY `day`,oid"
 
     jdbcDF.registerTempTable("ad")
     val jdbc = jdbcDF
