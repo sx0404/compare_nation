@@ -34,8 +34,9 @@ object jianglong_task {
         "driver" -> "com.mysql.jdbc.Driver"
       )
     ).load()
-    val sql_str = "SELECT ad_id,day,SUM(clicks),SUM(impressions),SUM(installs) FROM `ad_data_hourly` where ad_id = 2854005 GROUP BY `day`"
-    jdbcDF.registerTempTable("names1")
+    val sql_str = "SELECT ad_id,day,SUM(clicks),SUM(impressions),SUM(installs) FROM `ad` where ad_id = 2854005 GROUP BY `day`"
+
+    jdbcDF.registerTempTable("ad")
     val jdbc = jdbcDF
       .sqlContext.sql(sql_str)
       .map{x =>

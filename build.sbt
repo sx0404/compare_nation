@@ -16,6 +16,7 @@ libraryDependencies += "org.apache.spark" % "spark-hive_2.10" % "1.6.1" % "provi
 
 //libraryDependencies += "com.sanoma.cda" %% "maxmind-geoip2-scala" % "1.5.1"
 
+libraryDependencies += "org.apache.spark" % "spark-sql_2.10" % "1.6.1" % "provided"
 
 //libraryDependencies += "org.json" % "json" % "20160212"
 
