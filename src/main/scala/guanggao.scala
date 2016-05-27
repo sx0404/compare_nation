@@ -16,17 +16,17 @@ object guanggao {
     "78472ddd7528bcacc15725a16aeec190" -> "kika",
     "4e5ab3a6d2140457e0423a28a094b1fd" -> "pro")
 
-  val oid_guanggaowei = Map("kika_home" -> "kika_themerec_facebook_ad",
-    "kika_emoji" -> "kika_keyboard_emoji_ucenter_icon_ads",
-    "kika_settingicon" -> "kika_keyboard_menu_ad",
-    "pro_home" -> "pro_themerec_facebook_ad",
-    "pro_emoji" -> "pro_keyboard_emoji_ucenter_icon_ads",
-    "setting-icon" -> "pro_keyboard_menu_ad",
-    "ikey_tuijianye" -> "ikey_themerec_facebook_ad",
-    "ikey_icon" -> "ikeyboard_keyboard_menu_ad",
-    "lite_kaipinguanggao" -> "lite_splash_Interstitial_ad",
-    "lite_tuijianye" -> "lite_themerec_facebook_ad",
-    "lite_icon" -> "lite_keyboard_menu_ad"
+  val oid_guanggaowei = Map("kika_themerec_facebook_ad" -> "kika_home",
+    "kika_keyboard_emoji_ucenter_icon_ads" -> "kika_emoji",
+    "kika_keyboard_menu_ad" -> "kika_settingicon",
+    "pro_themerec_facebook_ad" -> "pro_home",
+    "pro_keyboard_emoji_ucenter_icon_ads" -> "pro_emoji",
+    "pro_keyboard_menu_ad" -> "setting-icon",
+    "ikey_themerec_facebook_ad" -> "ikey_tuijianye",
+    "ikeyboard_keyboard_menu_ad" -> "ikey_icon",
+    "lite_splash_Interstitial_ad" -> "lite_kaipinguanggao",
+    "lite_themerec_facebook_ad" -> "lite_tuijianye",
+    "lite_keyboard_menu_ad" -> "lite_icon"
   )
 
   def main(args: Array[String]) = {
