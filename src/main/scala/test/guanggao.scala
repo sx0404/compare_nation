@@ -1,3 +1,4 @@
+package test
 /**
   * Created by SX_H on 2016/5/16.
   */
@@ -42,7 +43,7 @@ object guanggao {
 
     val result_sum = get_sum(sc)
     write_csv(result_sum)
-
+    sc.stop()
    // val shell = ""
   }
 
@@ -65,13 +66,14 @@ object guanggao {
     jdbc
   }
 
+
   def write_csv(result:Array[(String,String,String,String,String,String)]): Unit ={
     val calendar =  Calendar.getInstance()
     val date = new SimpleDateFormat("yyyy-MM-dd").format(calendar.getTime())
     val path = "mail_jianglong/" + date + ".csv"
     val wr = new OutputStreamWriter(new FileOutputStream(new File(path)), "UTF8")
     val writers = new BufferedWriter(wr)
-    writers.write("day" + "," + "guangaowei" + "," +"app_name" + "," +"sum(clicks)" + "," + "sum(impretions)" + "," + "sum(installs)" + "\r\n")
+    writers.write("day" + "," + "oid" + "," +"app_name" + "," +"sum(clicks)" + "," + "sum(impretions)" + ","+ "sum(installs)" + "sum(installs)/sum(clicks)"+ "\r\n")
     for (item <- result) {
       println("sx" + item)
       val guanggaowei = item._2

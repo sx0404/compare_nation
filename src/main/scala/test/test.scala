@@ -1,10 +1,10 @@
+package test
 /**
   * Created by SX_H on 2016/5/16.
   */
 import org.apache.spark.{SparkConf, SparkContext}
-import java.io._
 
-object test2 {
+object test {
   def main(args: Array[String]) = {
     val conf = new SparkConf()
     val sc = new SparkContext(conf)
@@ -21,32 +21,24 @@ object test2 {
     val sever_fullpath = "s3n://emojikeyboardlite/service_full/20160521/full-r-00055"
     val meta_dailypath = "s3n://emojikeyboardlite/meta/20160521/metatab-r-00015"
 
-    val sever_fulldata = percent_language(sever_fullpath, sc)
+    val sever_fulldata = compare_nation(sever_fullpath, sc)
     //val meta_dailydata = compare_nation(meta_dailypath, sc)
 
 
-    val path1 = "hdfs:///sx/percent_country/"
-    val path2 = "hdfs:///sx/percent_lg/"
+    val path1 = "hdfs:///sx/word1/"
+    HDFS.removeFile(path1)
+    //.removeFile(path1)
 
-    val writer_country = new PrintWriter(new File("result_contry.txt" ))
-    val writer_lg = new PrintWriter(new File("result_lg.txt" ))
-    for (item <- sever_fulldata._1) {
-      writer_country.write(item + "\n")
-    }
-    writer_country.close()
-    for (item <- sever_fulldata._2) {
-      writer_lg.write(item + "\n")
-    }
-    writer_lg.close()
-
+    sever_fulldata.repartition(1).saveAsTextFile(path1)
     //meta_dailydata.repartition(1).saveAsTextFile("hdfs:///sx/word2/")
   }
 
-  def percent_language(path: String, sc: SparkContext) = {
+  def compare_nation(path: String, sc: SparkContext) = {
 
 
     val ip2country = loadIP2COUNTRY(sc)
     val ip2Lc = sc.broadcast(ip2country)
+
 
     println("sx"+path)
     val user = sc.textFile(path)
@@ -54,7 +46,6 @@ object test2 {
         val item = x.split("\t")
         val deviceuid = item(0)
         val nation = item(6).toUpperCase
-        val lg = item(10)
         val ip = get_ip(item(15))
 
         val ipL = ip2Long(ip)
@@ -64,39 +55,21 @@ object test2 {
 
         val country = findCountry(iptable, ipLong = ipL)
 //        (deviceuid, nation, country)
-        (deviceuid,nation,lg,country)
+        (deviceuid,nation,country)
       }
       .cache()
 
-    val total_user = user.map{ case (duid,nation,lg,country) =>
-      (duid)
-    }.distinct().count().toFloat
-
-      val country_user = user.map {
-        case (duid, nation, lg, country) =>
-          (duid, country)
+      val sameCount = user.filter{case (duid, nation, country) =>
+        (nation == country ) && nation != ""
       }
-        .distinct()
-        .map { case (duid, country) =>
-          (country, 1)
-        }.reduceByKey(_ + _)
-        .map { x =>
-          val result = x._2.toFloat / total_user
-          (x._1, result)
-        }.collect().sortBy(_._2)
+      .count.toFloat
 
-      val lg_user = user.map{
-        case (duid,nation,lg,country) =>
-          (duid,lg)
-      }.distinct()
-      .map{ case (duid,lg) =>
-        (lg,1)
-      }.reduceByKey(_+_)
-      .map{x =>
-       val jieguo = x._2.toFloat / total_user
-        (x._1,jieguo)
-      }.collect().sortBy(_._2)
+      val totalCount = user.count.toFloat
 
+      val samePercent = sameCount / totalCount
+
+
+      println("suxin-log samePercent " + samePercent)
 
     user.unpersist()
 
@@ -110,7 +83,7 @@ object test2 {
 //          false
 //        }
 //      }
-    (country_user,lg_user)
+    user
   }
 
   def ip2Long(ipAddress: String) = {
